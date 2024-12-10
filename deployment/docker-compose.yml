@@ -3,16 +3,16 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ../backend
-      dockerfile: ../deployment/Dockerfile  # Corrected path to Dockerfile
+      context: ..
+      dockerfile: deployment/Dockerfile
     container_name: django_backend
     environment:
       DJANGO_SETTINGS_MODULE: core.settings
       DB_HOST: db
       DB_PORT: 5432
-      DB_NAME: dev_db
-      DB_USER: dev_user
-      DB_PASSWORD: dev_password
+      DB_NAME: health_db  # Updated to use the new database
+      DB_USER: jparep
+      DB_PASSWORD: jparepson1@2
       PYTHONUNBUFFERED: 1
     volumes:
       - ../backend:/app
@@ -25,25 +25,14 @@ services:
     image: postgres:15
     container_name: postgres_db
     environment:
-      POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: dev_password
-      POSTGRES_DB: dev_db
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: jparep
+      POSTGRES_PASSWORD: jparepson1@2
+      POSTGRES_DB: health_db  # Create the database during initialization
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  frontend:
-    build:
-      context: ../frontend
-    container_name: frontend_service
-    environment:
-      NODE_ENV: development
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Add initialization scripts
     ports:
-      - "3000:3000"
-    volumes:
-      - ../frontend:/app
-    command: ["npm", "start"]
+      - "5432:5432"
 
 volumes:
   postgres_data:

@@ -5,25 +5,35 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Install system dependencies required for Python packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev gcc curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    export PATH="$PATH:/root/.local/bin"
+    chmod +x /root/.local/bin/poetry
 
-# Copy Poetry configuration files first for better build caching
-COPY ../backend/pyproject.toml ../backend/poetry.lock ./
+# Add Poetry to PATH globally
+ENV PATH="/root/.local/bin:$PATH"
+
+# Verify Poetry installation
+RUN poetry --version
+
+# Copy Poetry configuration files to the container
+COPY backend/pyproject.toml backend/poetry.lock ./
 
 # Install production dependencies using Poetry
-RUN poetry install --no-root --without dev
+RUN poetry install --no-root --only main
 
-# Copy the Django backend code
-COPY ../backend/ .
+# Copy the backend application code into the container
+COPY backend/ ./
+
+# Set environment variables required by Django
+ENV DJANGO_SETTINGS_MODULE=core.settings
+ENV PYTHONUNBUFFERED=1
 
 # Collect static files (for production)
-RUN python manage.py collectstatic --noinput
+RUN poetry run python manage.py collectstatic --noinput
 
 # Expose the default Django port
 EXPOSE 8000
