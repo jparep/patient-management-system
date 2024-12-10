@@ -1,0 +1,67 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+*.manifest
+*.spec
+
+# Environment variables
+.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Virtual environment directories
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Static and media files
+/static/
+media/
+*.css.map
+*.js.map
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Docker
+docker-compose.override.yml
+*.env
+*.pid
+.dockerignore
+node_modules/
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Backup files
+*.bak
+*.tmp
+*.old
