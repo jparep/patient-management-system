@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = "Backend service for the Patient Management System."
+authors = ["jparep <parepson@gmail.com>"]
+readme = "README.md"
+license = "MIT"  # Add a license if applicable
+homepage = "https://github.com/jparep/patient-management-system"  # Optional
+repository = "https://github.com/jparep/patient-management-system"  # Optional
+keywords = ["django", "rest-framework", "patient-management"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = ">=5.1.4"
+djangorestframework = ">=3.15.2"
+psycopg2-binary = ">=2.9.7"
+gunicorn = ">=23.0.0"
+whitenoise = ">=6.8.2"
+
+[tool.poetry.dev-dependencies]
+pytest = ">=8.3.4"
+django-debug-toolbar = ">=4.4.6"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
