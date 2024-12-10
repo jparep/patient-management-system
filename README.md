@@ -14,62 +14,64 @@ A professional-grade **Healthcare Management System** designed for managing pati
 - **Billing System**: Tracks payments and manages invoices.
 - **Role-Based Access Control (RBAC)**: Limits user actions based on roles.
 
-## File Structure
+# Patient Management System File Structure
 
-patient-management-system/
-├── backend/
-│   ├── api/                       # Django REST API app
-│   │   ├── __init__.py
-│   │   ├── models.py
-│   │   ├── serializers.py
-│   │   ├── views.py
-│   │   ├── urls.py
-│   │   └── logic/
-│   │       ├── patient_logic.py
-│   │       ├── appointment_logic.py
-│   │       └── billing_logic.py
-│   ├── core/                      # Core Django settings
-│   │   ├── __init__.py
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   ├── manage.py                  # Django management script
-│   ├── requirements/              # Python dependencies
-│   │   ├── base.txt
-│   │   ├── dev.txt
-│   │   ├── prod.txt
-├── frontend/
-│   ├── src/                       # React/Vue/Angular code
-│   │   ├── components/
-│   │   │   ├── PatientsList.jsx
-│   │   │   └── AppointmentForm.jsx
-│   │   ├── App.jsx
-│   │   └── index.js
-│   ├── public/                    # Static assets (index.html, icons, etc.)
-│   │   ├── index.html
-│   │   └── favicon.ico
-│   ├── package.json               # Frontend dependencies
-│   ├── tailwind.config.js         # TailwindCSS config
-│   └── postcss.config.js          # PostCSS config for Tailwind
-├── deployment/
-│   ├── docker-compose.yml         # Docker services
-│   ├── Dockerfile                 # Backend Dockerfile
-│   ├── nginx.conf                 # Nginx config
-│   ├── k8s/                       # Kubernetes manifests
-│   │   ├── deployment.yaml
-│   │   ├── service.yaml
-│   │   └── ingress.yaml
-│   ├── terraform/                 # Terraform IaC scripts
-│   │   ├── main.tf
-│   │   └── variables.tf
-│   └── .env                       # Environment variables
-├── test/
-│   ├── backend/                   # Backend unit tests
-│   ├── frontend/                  # Frontend unit tests
-│   └── integration/               # End-to-end tests
-├── .gitignore                     # Ignore unnecessary files
-├── README.md                      # Documentation
-└── .pre-commit-config.yaml        # Pre-commit hooks
+```plaintext
+        patient-management-system/
+        ├── backend/
+        │   ├── api/                       # Django REST API app
+        │   │   ├── __init__.py
+        │   │   ├── models.py
+        │   │   ├── serializers.py
+        │   │   ├── views.py
+        │   │   ├── urls.py
+        │   │   └── logic/
+        │   │       ├── patient_logic.py
+        │   │       ├── appointment_logic.py
+        │   │       └── billing_logic.py
+        │   ├── core/                      # Core Django settings
+        │   │   ├── __init__.py
+        │   │   ├── settings.py
+        │   │   ├── urls.py
+        │   │   └── wsgi.py
+        │   ├── manage.py                  # Django management script
+        │   ├── requirements/              # Python dependencies
+        │   │   ├── base.txt
+        │   │   ├── dev.txt
+        │   │   ├── prod.txt
+        ├── frontend/
+        │   ├── src/                       # React/Vue/Angular code
+        │   │   ├── components/
+        │   │   │   ├── PatientsList.jsx
+        │   │   │   └── AppointmentForm.jsx
+        │   │   ├── App.jsx
+        │   │   └── index.js
+        │   ├── public/                    # Static assets (index.html, icons, etc.)
+        │   │   ├── index.html
+        │   │   └── favicon.ico
+        │   ├── package.json               # Frontend dependencies
+        │   ├── tailwind.config.js         # TailwindCSS config
+        │   └── postcss.config.js          # PostCSS config for Tailwind
+        ├── deployment/
+        │   ├── docker-compose.yml         # Docker services
+        │   ├── Dockerfile                 # Backend Dockerfile
+        │   ├── nginx.conf                 # Nginx config
+        │   ├── k8s/                       # Kubernetes manifests
+        │   │   ├── deployment.yaml
+        │   │   ├── service.yaml
+        │   │   └── ingress.yaml
+        │   ├── terraform/                 # Terraform IaC scripts
+        │   │   ├── main.tf
+        │   │   └── variables.tf
+        │   └── .env                       # Environment variables
+        ├── test/
+        │   ├── backend/                   # Backend unit tests
+        │   ├── frontend/                  # Frontend unit tests
+        │   └── integration/               # End-to-end tests
+        ├── .gitignore                     # Ignore unnecessary files
+        ├── README.md                      # Documentation
+        └── .pre-commit-config.yaml        # Pre-commit hooks
+```
 
 ---
 
