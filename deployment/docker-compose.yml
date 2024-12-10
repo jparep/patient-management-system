@@ -5,15 +5,16 @@ services:
   backend:
     build:
       context: ../backend
-      dockerfile: ../deployment/Dockerfile
+      dockerfile: ./Dockerfile  # Corrected path to Dockerfile
     container_name: django_backend
     environment:
+      DJANGO_SETTINGS_MODULE: core.settings
       DB_HOST: db
       DB_PORT: 5432
       DB_NAME: dev_db
       DB_USER: dev_user
       DB_PASSWORD: dev_password
-      DJANGO_SETTINGS_MODULE: core.settings
+      PYTHONUNBUFFERED: 1
     volumes:
       - ../backend:/app
     ports:
@@ -38,6 +39,7 @@ services:
   frontend:
     build:
       context: ../frontend
+      dockerfile: ./Dockerfile  # Optional if the frontend also has its Dockerfile in deployment
     container_name: frontend_service
     environment:
       NODE_ENV: development

@@ -1,5 +1,5 @@
 # Use a lightweight Python base image
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -7,16 +7,17 @@ WORKDIR /app
 # Install system dependencies required for Python packages
 RUN apt-get update && apt-get install -y \
     libpq-dev gcc curl && \
-    apt-get clean
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Python package manager
-RUN python -m pip install --upgrade pip
+# Install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 - && \
+    export PATH="$PATH:/root/.local/bin"
 
-# Copy only the requirements files first for better build caching
-COPY ../backend/requirements/ /requirements/
+# Copy Poetry configuration files first for better build caching
+COPY ../backend/pyproject.toml ../backend/poetry.lock ./
 
-# Install production dependencies
-RUN pip install --no-cache-dir -r /requirements/prod.txt
+# Install production dependencies using Poetry
+RUN poetry install --no-root --without dev
 
 # Copy the Django backend code
 COPY ../backend/ .
@@ -28,4 +29,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Start the application using Gunicorn
-CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["poetry", "run", "gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]
