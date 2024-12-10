@@ -1,11 +1,10 @@
 version: '3.8'
 
 services:
-  # Django Backend Service
   backend:
     build:
       context: ../backend
-      dockerfile: ./Dockerfile  # Corrected path to Dockerfile
+      dockerfile: ../deployment/Dockerfile  # Corrected path to Dockerfile
     container_name: django_backend
     environment:
       DJANGO_SETTINGS_MODULE: core.settings
@@ -22,7 +21,6 @@ services:
     depends_on:
       - db
 
-  # PostgreSQL Database Service
   db:
     image: postgres:15
     container_name: postgres_db
@@ -35,11 +33,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # Frontend Service (Tailwind, React, etc.)
   frontend:
     build:
       context: ../frontend
-      dockerfile: ./Dockerfile  # Optional if the frontend also has its Dockerfile in deployment
     container_name: frontend_service
     environment:
       NODE_ENV: development
