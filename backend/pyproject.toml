@@ -3,11 +3,12 @@ name = "backend"
 version = "0.1.0"
 description = "Backend service for the Patient Management System."
 authors = ["jparep <parepson@gmail.com>"]
-readme = "README.md"
+readme = "../README.md"
 license = "MIT"
 homepage = "https://github.com/jparep/patient-management-system"
 repository = "https://github.com/jparep/patient-management-system"
 keywords = ["django", "rest-framework", "patient-management"]
+package-mode = false  # Disable Poetry package mode for dependency management only
 
 [tool.poetry.dependencies]
 python = "^3.11"
