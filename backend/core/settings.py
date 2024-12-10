@@ -56,13 +56,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'default_db'),
-        'USER': os.getenv('DB_USER', 'default_user'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'default_password'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'NAME': os.getenv('DB_NAME', 'health_db'),
+        'USER': os.getenv('DB_USER', 'jparep'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'jparepson1@2'),
+        'HOST': os.getenv('DB_HOST', 'db'),
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
