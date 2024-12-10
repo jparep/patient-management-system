@@ -1,21 +1,27 @@
 version: '3.8'
 
 services:
+  # Django Backend Service
   backend:
     build:
       context: ../backend
+      dockerfile: ../deployment/Dockerfile
     container_name: django_backend
     environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=dev_db
-      - DB_USER=dev_user
-      - DB_PASSWORD=dev_password
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: dev_db
+      DB_USER: dev_user
+      DB_PASSWORD: dev_password
+      DJANGO_SETTINGS_MODULE: core.settings
+    volumes:
+      - ../backend:/app
     ports:
       - "8000:8000"
     depends_on:
       - db
 
+  # PostgreSQL Database Service
   db:
     image: postgres:15
     container_name: postgres_db
@@ -28,12 +34,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  # Frontend Service (Tailwind, React, etc.)
   frontend:
     build:
       context: ../frontend
     container_name: frontend_service
+    environment:
+      NODE_ENV: development
     ports:
       - "3000:3000"
+    volumes:
+      - ../frontend:/app
+    command: ["npm", "start"]
 
 volumes:
   postgres_data:
