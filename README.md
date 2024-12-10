@@ -164,4 +164,4 @@ List all appointments for a doctor:
 Contributions are welcome! Please submit a pull request or report issues via GitHub.
 
 ### License
-This project is licensed under the (MIT License)[https://opensource.org/license/mit]
+This project is licensed under the [MIT License](https://opensource.org/license/mit).
