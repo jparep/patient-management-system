@@ -38,3 +38,15 @@ CREATE TABLE appointments (
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (doctor_id) REFERENCES users(user_id)
 );
+
+# Stores Patient Medical Records
+CREATE TABLE medical_records (
+    record_id SERIAL PRIMARY KEY,
+    patient_id INT NOT NULL,
+    doctor_id INT NOT NULL,
+    diagnosis TEXT NOT NULL,
+    treatment_plan TEXT,
+    record_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES users(user_id)
+);
