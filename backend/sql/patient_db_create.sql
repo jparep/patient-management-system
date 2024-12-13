@@ -50,3 +50,16 @@ CREATE TABLE medical_records (
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (doctor_id) REFERENCES users(user_id)
 );
+
+# Stores Billing and Invoice
+CREATE TABLE billing (
+    billing_id SERIAL PRIMARY KEY,
+    patient_id INT NOT NULL,
+    appointment_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    status ENUM('pending', 'paid', 'cancelled') DEFAULT 'pending',
+    issued_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    paid_at TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
+);
