@@ -62,3 +62,14 @@ CREATE TABLE appointments (
     CONSTRAINT unique_appointment UNIQUE (patient_id, appointment_date, appointment_time)
 );
 
+-- Medical records table (stores patient medical records)
+CREATE TABLE medical_records (
+    record_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    patient_id UUID NOT NULL,
+    doctor_id UUID NOT NULL,
+    diagnosis TEXT NOT NULL,
+    treatment_plan TEXT,
+    record_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES users(user_id)
+);
