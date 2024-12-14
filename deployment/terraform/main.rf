@@ -1,0 +1,54 @@
+# Main Terraform configuration for AWS EKS deployment
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.19.0"
+
+  name = var.vpc_name
+  cidr = var.vpc_cidr
+  azs  = var.availability_zones
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
+}
+
+module "eks" {
+  source          = "terraform-aws-modules/eks/aws"
+  version         = "19.14.0"
+
+  cluster_name    = var.cluster_name
+  cluster_version = var.cluster_version
+  subnets         = module.vpc.private_subnets
+  vpc_id          = module.vpc.vpc_id
+
+  node_groups = {
+    eks_nodes = {
+      desired_capacity = var.node_desired_capacity
+      max_capacity     = var.node_max_capacity
+      min_capacity     = var.node_min_capacity
+
+      instance_type = var.node_instance_type
+    }
+  }
+}
+
+# Deploy Kubernetes Ingress Controller
+resource "helm_release" "nginx_ingress" {
+  name       = "nginx-ingress"
+  chart      = "ingress-nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  namespace  = "kube-system"
+
+  values = [
+    <<EOF
+controller:
+  service:
+    type: LoadBalancer
+EOF
+  ]
+}
+
+# Kubernetes Namespace for the Application
+resource "kubernetes_namespace" "app_namespace" {
+  metadata {
+    name = var.namespace
+  }
+}
