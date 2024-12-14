@@ -31,3 +31,16 @@ CREATE TABLE users (
     FOREIGN KEY (role_id) REFERENCES roles(role_id)
 );
 
+-- Patients table (stores patient details)
+CREATE TABLE patients (
+    patient_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    gender_id INT NOT NULL,
+    phone_number VARCHAR(15) UNIQUE NOT NULL,
+    email VARCHAR(100),
+    address TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (gender_id) REFERENCES genders(gender_id)
+);
