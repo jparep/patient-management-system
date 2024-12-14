@@ -1,21 +1,26 @@
-version: '3.8'
-
-services:
-  backend:
-    build:
-      context: ../backend
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-  frontend:
-    build:
-      context: ../frontend
-    ports:
-      - "3000:3000"
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: database
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: my-backend-image:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_HOST
+          value: "db"
+        - name: DB_PORT
+          value: "5432"
