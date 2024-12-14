@@ -18,3 +18,16 @@ CREATE TABLE statuses (
     status_id SERIAL PRIMARY KEY,
     status_name VARCHAR(20) UNIQUE NOT NULL
 );
+
+-- Users table (stores information about system users)
+CREATE TABLE users (
+    user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
+
