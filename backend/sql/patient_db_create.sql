@@ -87,3 +87,10 @@ CREATE TABLE billing (
     FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id),
     FOREIGN KEY (status_id) REFERENCES statuses(status_id)
 );
+
+
+-- Permissions table (stores individual permissions)
+CREATE TABLE permissions (
+    permission_id SERIAL PRIMARY KEY,
+    permission_name VARCHAR(50) UNIQUE NOT NULL
+);
