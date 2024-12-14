@@ -6,13 +6,9 @@ services:
       context: ..
       dockerfile: deployment/Dockerfile
     container_name: django_backend
+    env_file: ../.env  # Load environment variables from .env
     environment:
       DJANGO_SETTINGS_MODULE: core.settings
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: health_db  # Updated to use the new database
-      DB_USER: jparep
-      DB_PASSWORD: jparepson1@2
       PYTHONUNBUFFERED: 1
     volumes:
       - ../backend:/app
@@ -24,13 +20,10 @@ services:
   db:
     image: postgres:15
     container_name: postgres_db
-    environment:
-      POSTGRES_USER: jparep
-      POSTGRES_PASSWORD: jparepson1@2
-      POSTGRES_DB: health_db  # Create the database during initialization
+    env_file: ../.env  # Load environment variables for database
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d  # Add initialization scripts
+      - ./init-scripts:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
 
