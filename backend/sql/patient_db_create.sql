@@ -94,3 +94,13 @@ CREATE TABLE permissions (
     permission_id SERIAL PRIMARY KEY,
     permission_name VARCHAR(50) UNIQUE NOT NULL
 );
+
+
+-- Role-permissions table (many-to-many relationship between roles and permissions)
+CREATE TABLE role_permissions (
+    role_id INT NOT NULL,
+    permission_id INT NOT NULL,
+    PRIMARY KEY (role_id, permission_id),
+    FOREIGN KEY (role_id) REFERENCES roles(role_id),
+    FOREIGN KEY (permission_id) REFERENCES permissions(permission_id)
+);
