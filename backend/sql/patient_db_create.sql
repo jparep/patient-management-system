@@ -6,3 +6,9 @@ CREATE TABLE roles (
     role_id SERIAL PRIMARY KEY,
     role_name VARCHAR(50) UNIQUE NOT NULL
 );
+
+-- Lookup table for genders
+CREATE TABLE genders (
+    gender_id SERIAL PRIMARY KEY,
+    gender_name VARCHAR(10) UNIQUE NOT NULL
+);
