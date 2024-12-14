@@ -44,3 +44,21 @@ CREATE TABLE patients (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (gender_id) REFERENCES genders(gender_id)
 );
+
+
+-- Appointments table (stores appointment information)
+CREATE TABLE appointments (
+    appointment_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    patient_id UUID NOT NULL,
+    doctor_id UUID NOT NULL,
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    status_id INT DEFAULT 1, -- Default: 'scheduled'
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES users(user_id),
+    FOREIGN KEY (status_id) REFERENCES statuses(status_id),
+    CONSTRAINT unique_appointment UNIQUE (patient_id, appointment_date, appointment_time)
+);
+
