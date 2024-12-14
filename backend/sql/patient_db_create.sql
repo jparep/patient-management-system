@@ -63,3 +63,12 @@ CREATE TABLE billing (
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
 );
+
+# Table to store rile base access control
+CREATE TABLE roles_permissions (
+    role VARCHAR(50) PRIMARY KEY,
+    can_register_patient BOOLEAN DEFAULT FALSE,
+    can_schedule_appointment BOOLEAN DEFAULT FALSE,
+    can_view_medical_records BOOLEAN DEFAULT FALSE,
+    can_generate_reports BOOLEAN DEFAULT FALSE
+);
