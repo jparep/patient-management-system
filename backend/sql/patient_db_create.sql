@@ -12,3 +12,9 @@ CREATE TABLE genders (
     gender_id SERIAL PRIMARY KEY,
     gender_name VARCHAR(10) UNIQUE NOT NULL
 );
+
+-- Lookup table for appointment and billing statuses
+CREATE TABLE statuses (
+    status_id SERIAL PRIMARY KEY,
+    status_name VARCHAR(20) UNIQUE NOT NULL
+);
