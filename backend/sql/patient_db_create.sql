@@ -73,3 +73,17 @@ CREATE TABLE medical_records (
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (doctor_id) REFERENCES users(user_id)
 );
+
+-- Billing table (stores billing and invoice information)
+CREATE TABLE billing (
+    billing_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    patient_id UUID NOT NULL,
+    appointment_id UUID NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    status_id INT DEFAULT 1, -- Default: 'pending'
+    issued_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    paid_at TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id),
+    FOREIGN KEY (status_id) REFERENCES statuses(status_id)
+);
